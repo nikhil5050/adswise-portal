@@ -1,0 +1,12 @@
+.portal-home {
+  display: block;
+  margin: 0 16px 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font: 600 12px/1.2 var(--ui, 'Montserrat', sans-serif);
+  letter-spacing: .04em;
+  color: var(--gold, #C9A24D);
+  text-decoration: none;
+  border: 1px solid rgba(201, 162, 77, .35);
+}
+.portal-home:hover { background: rgba(201, 162, 77, .12); }
