@@ -432,7 +432,7 @@ function renderHistory(){
   let list=[...S.invoices].sort((a,b)=>b.createdAt-a.createdAt);
   document.getElementById('view-history').innerHTML=`
   <div class="panel card">
-   <h3>🗂 Invoice History</h3><div class="panel-sub">${S.invoices.length} invoice(s) stored in this browser.</div>
+   <h3>🗂 Invoice History</h3><div class="panel-sub">${S.invoices.length} invoice(s) saved in the cloud.</div>
    <div class="table-tools">
     <input id="histQ" placeholder="Search no. / client…" value="${esc(q)}" oninput="renderHistoryBody()" style="min-width:210px">
     <select id="histSt" onchange="renderHistoryBody()"><option value="">All statuses</option>
@@ -679,7 +679,7 @@ function clearImg(k){S.settings[k]=null;LS.save('settings',S.settings);renderSet
 function backup(){dl(new Blob([JSON.stringify({settings:S.settings,clients:S.clients,invoices:S.invoices,counters:S.counters},null,2)],{type:'application/json'}),'adswise-invoices-backup.json');toast('Backup exported.','ok');}
 function restore(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();
   r.onload=()=>{try{const j=JSON.parse(r.result);['settings','clients','invoices','counters'].forEach(k=>{if(j[k]!==undefined){S[k]=j[k];LS.save(k,j[k]);}});toast('Data restored.','ok');go('dashboard');}catch(err){toast('Invalid backup file.','err');}};r.readAsText(f);}
-function resetAll(){if(!confirm('This permanently clears ALL invoices, clients and settings in this browser. Continue?'))return;
+function resetAll(){if(!confirm('This permanently clears ALL invoices, clients and settings for EVERYONE (cloud data). Continue?'))return;
   ['settings','clients','invoices','counters'].forEach(k=>localStorage.removeItem('adwi_'+k));location.reload();}
 
 /* ============ misc ============ */

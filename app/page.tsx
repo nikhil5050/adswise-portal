@@ -39,7 +39,12 @@ export default function Home() {
         ))}
       </div>
 
-      <footer className="portal-foot">Adswise Marketing · Pune</footer>
+      <footer className="portal-foot">
+        Adswise Marketing · Pune
+        <form method="post" action="/api/logout">
+          <button className="portal-logout" type="submit">Sign out</button>
+        </form>
+      </footer>
     </main>
   );
 }

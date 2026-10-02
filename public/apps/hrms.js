@@ -1,7 +1,7 @@
 
 /* ============================================================
    ADSWISE HR DOCUMENT SYSTEM  — single-file, offline-capable
-   Data persists in this browser via localStorage.
+   Data persists in the portal's cloud database (see components/LegacyApp.tsx).
    ============================================================ */
 "use strict";
 const LS = {
@@ -545,7 +545,7 @@ function renderSettings(){
 
     <div class="panel card">
       <h3>ℹ Data &amp; storage</h3>
-      <div class="panel-sub" style="margin-bottom:14px">Everything you enter stays in this browser only (localStorage). Nothing is uploaded to any server. To keep your data, open this same HTML file from the same browser on the same device.</div>
+      <div class="panel-sub" style="margin-bottom:14px">Everything you enter is saved to the Adswise cloud database and is shared with everyone who signs in to this portal, on any device. Use Export to keep an offline backup.</div>
       <div class="legal-banner"><span class="lb-ic">⚠</span><div class="lb-t"><b>Legal review required.</b> Documents marked <b>REVIEW</b> (agreements, NDA, warning, show-cause, PIP, full &amp; final) are starting drafts based on common Indian practice. State-specific Shops &amp; Establishments rules, PF/ESIC/gratuity thresholds and disciplinary procedure must be confirmed by a qualified advocate before issue.</div></div>
       <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn ghost" onclick="exportBackup()">⬇ Export all data (JSON)</button>
@@ -790,7 +790,7 @@ function dl(blob,name){ const a=document.createElement('a'); a.href=URL.createOb
    ============================================================ */
 function exportBackup(){ dl(new Blob([JSON.stringify({letterhead:STATE.letterhead,signatory:STATE.signatory,refCounters:STATE.refCounters,drafts:STATE.drafts,employees:STATE.employees},null,2)],{type:'application/json'}),'adswise-hrms-backup.json'); toast('Backup exported.','ok'); }
 function importBackup(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=()=>{ try{ const j=JSON.parse(r.result); ['letterhead','signatory','refCounters','drafts','employees'].forEach(k=>{ if(j[k]!==undefined){STATE[k]=j[k];LS.save(k,j[k]);} }); toast('Data imported.','ok'); go('dashboard'); }catch(err){ toast('Invalid backup file.','err'); } }; r.readAsText(f); }
-function resetAll(){ if(!confirm('This permanently clears all letterhead, drafts and employee records in this browser. Continue?'))return; ['letterhead','signatory','refCounters','drafts','employees'].forEach(k=>localStorage.removeItem('adw_'+k)); location.reload(); }
+function resetAll(){ if(!confirm('This permanently clears all letterhead, drafts and employee records for EVERYONE (cloud data). Continue?'))return; ['letterhead','signatory','refCounters','drafts','employees'].forEach(k=>localStorage.removeItem('adw_'+k)); location.reload(); }
 function toggleTheme(){ const h=document.documentElement; const t=h.getAttribute('data-theme')==='dark'?'light':'dark'; h.setAttribute('data-theme',t); LS.save('theme',t); }
 function toast(msg,type='info'){ const t=document.createElement('div'); t.className='toast '+type; t.innerHTML=`<span>${type==='ok'?'✓':type==='err'?'✕':type==='warn'?'⚠':'ℹ'}</span><span>${esc(msg)}</span>`; document.getElementById('toasts').appendChild(t); setTimeout(()=>{t.style.opacity='0';t.style.transition='.3s';setTimeout(()=>t.remove(),300);},3400); }
 

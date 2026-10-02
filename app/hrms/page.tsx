@@ -7,5 +7,5 @@ import '../portal-link.css';
 export const metadata: Metadata = { title: 'Adswise HR Document System' };
 
 export default function Page() {
-  return <LegacyApp markup={markup} scripts={[...libs, '/apps/hrms.js']} />;
+  return <LegacyApp app="hrms" prefix="adw_" markup={markup} scripts={[...libs, '/apps/hrms.js']} />;
 }

@@ -10,3 +10,45 @@
   border: 1px solid rgba(201, 162, 77, .35);
 }
 .portal-home:hover { background: rgba(201, 162, 77, .12); }
+
+/* Cloud sync status (components/LegacyApp.tsx) */
+.cloud-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 16px;
+  text-align: center;
+  background: #0F2B5B;
+  color: #fff;
+  font: 500 15px/1.5 'Inter', system-ui, sans-serif;
+}
+.cloud-overlay p { margin: 0; }
+.cloud-overlay button {
+  justify-self: center;
+  padding: 10px 22px;
+  border: 0;
+  border-radius: 8px;
+  background: #C9A24D;
+  color: #0F2B5B;
+  font: 600 14px 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+.cloud-save {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font: 600 12px/1.2 'Montserrat', sans-serif;
+  color: #fff;
+  background: #15803d;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .2);
+  pointer-events: none;
+}
+.cloud-save--saving { background: #0F2B5B; }
+.cloud-save--failed { background: #b91c1c; }
+@media print { .cloud-save { display: none; } }

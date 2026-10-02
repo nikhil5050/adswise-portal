@@ -7,5 +7,5 @@ import '../portal-link.css';
 export const metadata: Metadata = { title: 'Adswise Invoice System' };
 
 export default function Page() {
-  return <LegacyApp markup={markup} scripts={[...libs, '/apps/invoice.js']} />;
+  return <LegacyApp app="invoice" prefix="adwi_" markup={markup} scripts={[...libs, '/apps/invoice.js']} />;
 }
